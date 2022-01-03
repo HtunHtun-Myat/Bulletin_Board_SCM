@@ -2,9 +2,9 @@ class PostsController < ApplicationController
   # index post list
   def index
     if params[:search]
-      @posts = PostsService.searchPostList(params[:search])
+      @posts = PostsService.searchPostList(params[:search], params[:page])
     else
-      @posts = PostsService.postList
+      @posts = PostsService.postList(params[:page])
     end
   end
 
@@ -35,7 +35,7 @@ class PostsController < ApplicationController
 
   # Update post
   def update
-    isUpdatePost = PostsService.updatePost(post_params)
+    isUpdatePost = PostsService.updatePost(post_params, params[:id])
     if isUpdatePost
       redirect_to root_path
     else

@@ -25,7 +25,7 @@
                 <td><%= post.description %></td>
                 <td><%= post.create_user_id %></td>
                 <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
-                <td><%= link_to "Edit", edit_post_path(post) ,class: "btn btn-success" %>
+                <td class="text-center"><%= link_to "Edit", edit_post_path(post) ,class: "btn btn-success" %>
                 <%= link_to "Destroy", post_path(post),
                                 method: :delete,
                                 data: { confirm: "Are you sure?" },
@@ -35,6 +35,7 @@
             <%end%>
         </tbody>
     </table>
+    <%= paginate @posts %>
   </div>
 </div>
 </div>

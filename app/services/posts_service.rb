@@ -1,7 +1,7 @@
 class PostsService
     # post list
-    def self.postList
-      @posts = PostsRepository.getPostList
+    def self.postList(page)
+      @posts = PostsRepository.getPostList(page)
     end
 
     # post detail
@@ -29,13 +29,13 @@ class PostsService
     # Update post
     # params post_params
     # return isUpdatePost
-    def self.updatePost(post_params)
+    def self.updatePost(post_params, id)
       # post = Post.new(post_params)
       # post.status = 1 # default when create
       # post.create_user_id = 1 #It will change when user is created
       # post.updated_user_id = 1 #It will change when user is created
       # post.updated_at = Time.now
-      isUpdatePost = PostsRepository.updatePost(post_params)
+      isUpdatePost = PostsRepository.updatePost(post_params, id)
     end
 
     # Delete post
@@ -45,7 +45,7 @@ class PostsService
     end
 
     # Search post
-    def self.searchPostList(search)
-      @posts = PostsRepository.searchPostList(search)
+    def self.searchPostList(search, page)
+      @posts = PostsRepository.searchPostList(search, page)
     end
 end

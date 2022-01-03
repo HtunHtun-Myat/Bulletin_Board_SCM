@@ -1,7 +1,7 @@
 class PostsRepository
   # Get All Post List
-  def self.getPostList
-    @posts = Post.all
+  def self.getPostList(page)
+    @posts = Post.page page
   end
 
   # Get Post Detail
@@ -20,8 +20,9 @@ class PostsRepository
   end
 
   # Update post
-  def self.updatePost(post_params)
-    isUpdatePost = Post.update(post_params)
+  def self.updatePost(post_params, id)
+    post = Post.find(id);
+    isUpdatePost = post.update(post_params)
   end
 
   # Delete post
@@ -34,8 +35,8 @@ class PostsRepository
   end
 
   # Search post
-  def self.searchPostList(search)
-    @posts = Post.search(search)
+  def self.searchPostList(search, page)
+    @posts = Post.search(search).page page
   end
 
 end
