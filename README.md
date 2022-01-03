@@ -1,24 +1,78 @@
+# TODO
+
+- [x] CRUD
+- [x] MVC
+- [x] Active Record
+- [ ] Search
+- [ ] Sort Column
+- [ ] Paginate
+- [x] Routes
+- [x] Migrate
+- [ ] CSV Export
+- [ ] Validation
+
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+SCM bulletin board with Ruby on Rails.
 
-Things you may want to cover:
+## Features
 
-* Ruby version
+- CRUD
+- MVC
+- Active Record
+- Search
+- Sort Column
+- Paginate
+- Routes
+- Migrate
+- CSV Export
 
-* System dependencies
+## Requirements
 
-* Configuration
+- Ruby = 2.5.9
+- Rails >= 6.1.3
 
-* Database creation
+## Tecnologies
 
-* Database initialization
+- Ruby
+- Rails
+- CSS and SCSS
+- JS
+- Bootstrap
 
-* How to run the test suite
+## Installation
 
-* Services (job queues, cache servers, search engines, etc.)
+Firstly, you need to install Ruby and Rails in local.
 
-* Deployment instructions
+CLick [Here](https://guides.rubyonrails.org/v5.0/getting_started.html) to install Ruby and Rails.
 
-* ...
+And then check each version after installation finished.
+
+```
+ruby -v
+
+rails --version
+
+```
+
+```
+git clone https://github.com/HtunHtun-Myat/Bulletin_Board_SCM.git
+
+```
+
+```
+cd Bulletin_Board_SCM
+
+```
+
+```
+rails db:migrate
+```
+
+After everything is done, run the project:
+
+```
+$ rails server
+```
+
+Finally open http://localhost:3000/ in your browser.
