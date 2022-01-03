@@ -10,6 +10,7 @@
 - [x] Migrate
 - [ ] CSV Export
 - [ ] Validation
+- [ ] Authentication
 
 # README
 
