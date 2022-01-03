@@ -3,9 +3,9 @@
 - [x] CRUD
 - [x] MVC
 - [x] Active Record
-- [ ] Search
+- [x] Search
 - [ ] Sort Column
-- [ ] Paginate
+- [x] Paginate
 - [x] Routes
 - [x] Migrate
 - [ ] CSV Export
