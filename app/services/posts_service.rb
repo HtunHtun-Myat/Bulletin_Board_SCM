@@ -11,7 +11,7 @@ class PostsService
 
     # post edit
     def self.postEdit(id)
-      $post = PostsRepository.postEdit(id)
+      @post = PostsRepository.postEdit(id)
     end 
     
     # Create new Post
@@ -42,5 +42,10 @@ class PostsService
     # param id
     def self.deletePost(id)
       PostsRepository.deletePost(id)
+    end
+
+    # Search post
+    def self.searchPostList(search)
+      @posts = PostsRepository.searchPostList(search)
     end
 end

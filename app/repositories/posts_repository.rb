@@ -33,4 +33,9 @@ class PostsRepository
     end
   end
 
+  # Search post
+  def self.searchPostList(search)
+    @posts = Post.search(search)
+  end
+
 end

@@ -1,7 +1,11 @@
 class PostsController < ApplicationController
   # index post list
   def index
-    @posts = PostsService.postList
+    if params[:search]
+      @posts = PostsService.searchPostList(params[:search])
+    else
+      @posts = PostsService.postList
+    end
   end
 
   # Post Detail
@@ -17,7 +21,6 @@ class PostsController < ApplicationController
   # Edit Post form
   def edit
     @post = PostsService.postEdit(params[:id])
-    logger.debug @posts
   end
 
   # Create a new Post
