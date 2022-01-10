@@ -1,6 +1,12 @@
+<% if notice %>
+  <div class="alert alert-info mt-3" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
 <div class="text-right">
   <%= link_to "New Post", new_post_path, class: "btn btn-success" %>
-  <input type="button" class="btn btn-success" value="CSV Export">
+  <a href="/posts/export.csv" class="btn btn-success">CSV Export</a>
 </div>
 <div class="py-4">
 <div class="card">

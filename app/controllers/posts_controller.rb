@@ -1,3 +1,5 @@
+require "csv"
+
 class PostsController < ApplicationController
   # index post list
   def index
@@ -25,31 +27,56 @@ class PostsController < ApplicationController
 
   # Create a new Post
   def create
-    isSavePost = PostsService.createPost(post_params)
-    if isSavePost
-      redirect_to root_path
-    else
-      render :new
+    @post = PostsService.createPost(post_params)
+
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render :new }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # Update post
   def update
-    isUpdatePost = PostsService.updatePost(post_params, params[:id])
-    if isUpdatePost
-      redirect_to root_path
-    else
-      render :edit
-    end
+    @post = PostsService.updatePost(post_params, params[:id])
+    respond_to do |format|
+      if @post.update(post_params)
+        format.html { redirect_to root_path, notice: 'Post was successfully updated.' }
+        format.json { render :show, status: :updated, location: @post }
+      else
+        format.html { render :edit }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end  
   end
 
   # Delete post
   def destroy
     PostsService.deletePost(params[:id])
-    redirect_to root_path
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Post was successfully deleted.' }
+      format.json { render :show, status: :deleted }
+    end  
   end
 
-  # post parameters
+  # csv export
+  def export
+    @posts = Post.all
+    
+    respond_to do |format|
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=posts.csv"
+      end
+    end
+  end
+
+  # post parameters 
   def post_params
     params.require(:post).permit(:title, :description, :status, :create_user_id, :updated_user_id, :updated_at)
   end

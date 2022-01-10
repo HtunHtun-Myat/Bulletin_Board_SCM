@@ -1,0 +1,12 @@
+<%- headers = ['Title', 'Description', 'Status', "Create User ID", 'Update User ID'] -%>
+<%= CSV.generate_line headers %>
+<%- @posts.each do |post| -%>
+  <%= CSV.generate_line([
+      post.title, 
+      post.description, 
+      post.status, 
+      post.create_user_id, 
+      post.updated_user_id
+    ]) 
+  -%>
+<%- end -%>
