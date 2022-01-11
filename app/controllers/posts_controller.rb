@@ -27,11 +27,12 @@ class PostsController < ApplicationController
 
   # Create a new Post
   def create
-    @post = PostsService.createPost(post_params)
+    user_id = session[:user_id]
+    @post = PostsService.createPost(post_params, user_id)
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to root_path, notice: 'Post was successfully created.' }
+        format.html { redirect_to posts_path, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -45,7 +46,7 @@ class PostsController < ApplicationController
     @post = PostsService.updatePost(post_params, params[:id])
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to root_path, notice: 'Post was successfully updated.' }
+        format.html { redirect_to posts_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :updated, location: @post }
       else
         format.html { render :edit }
@@ -59,7 +60,7 @@ class PostsController < ApplicationController
     PostsService.deletePost(params[:id])
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Post was successfully deleted.' }
+      format.html { redirect_to posts_path, notice: 'Post was successfully deleted.' }
       format.json { render :show, status: :deleted }
     end  
   end

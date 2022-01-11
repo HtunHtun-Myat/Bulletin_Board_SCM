@@ -16,8 +16,8 @@ class PostsService
     
     # Create new Post
     # params post_params
-    def self.createPost(post_params)
-      @post = PostsRepository.createPost(post_params)
+    def self.createPost(post_params, user_id)
+      @post = PostsRepository.createPost(post_params, user_id)
     end
 
     # Update post

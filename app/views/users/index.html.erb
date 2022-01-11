@@ -1,0 +1,53 @@
+<% if notice %>
+  <div class="alert alert-info" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+<div class="text-right">
+  <%= link_to "New User", new_user_path, class: "btn btn-success" %>
+  <a href="#" class="btn btn-success">CSV Export</a>
+</div>
+<div class="py-4">
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-2 text-left">User List</div>
+      <div class="col-6"></div>
+      <div class="col-4 text-right">
+        <%= form_tag users_path, :method => :get, class: "d-flex" do %>
+          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "Search with username" %>
+          <%= submit_tag "Search", class: "btn btn-success ml-2" do %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="card-body"> 
+    <table class="table table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Email</th>
+                <th collapse=2>Operation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.email %></td>
+                <td class="text-center"><%= link_to "Edit", edit_user_path(user) ,class: "btn btn-success" %>
+                <%= link_to "Destroy", user_path(user),
+                                method: :delete,
+                                data: { confirm: "Are you sure?" },
+                                class: "btn btn-danger" 
+                                %></td>
+            </tr>
+            <%end%>
+        </tbody>
+    </table>
+    <%= paginate @users %>
+  </div>
+</div>
+</div>

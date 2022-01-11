@@ -4,12 +4,12 @@
 - [x] MVC
 - [x] Active Record
 - [x] Search
-- [ ] Sort Column
+- [x] Sort Column
 - [x] Paginate
 - [x] Routes
 - [x] Migrate
-- [ ] CSV Export
-- [ ] Validation
+- [x] CSV Export
+- [x] Validation
 - [ ] Authentication
 
 # README
@@ -27,6 +27,7 @@ SCM bulletin board with Ruby on Rails.
 - Routes
 - Migrate
 - CSV Export
+- Authentication
 
 ## Requirements
 
@@ -53,21 +54,30 @@ And then check each version after installation finished.
 ruby -v
 
 rails --version
-
 ```
 
 ```
 git clone https://github.com/HtunHtun-Myat/Bulletin_Board_SCM.git
-
 ```
 
 ```
 cd Bulletin_Board_SCM
+```
 
+```
+bundle install
+```
+
+```
+rails db:setup
 ```
 
 ```
 rails db:migrate
+```
+
+```
+rails db:seed
 ```
 
 After everything is done, run the project:

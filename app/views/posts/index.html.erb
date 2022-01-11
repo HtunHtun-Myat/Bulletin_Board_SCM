@@ -1,5 +1,5 @@
 <% if notice %>
-  <div class="alert alert-info mt-3" role="alert">
+  <div class="alert alert-info" role="alert">
     <%= notice %>
   </div>
 <% end %>
@@ -11,7 +11,17 @@
 <div class="py-4">
 <div class="card">
   <div class="card-header">
-    Post List
+    <div class="row">
+      <div class="col-2 text-left">Post List</div>
+      <div class="col-6"></div>
+      <div class="col-4 text-right">
+        <%= form_tag posts_path, :method => :get, class: "d-flex" do %>
+          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "Search with title" %>
+          <%= submit_tag "Search", class: "btn btn-success ml-2" do %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
   <div class="card-body"> 
     <table class="table table-responsive table-bordered">

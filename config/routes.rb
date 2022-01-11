@@ -1,6 +1,19 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root 'posts#index'
+  # root route
+  root 'sessions#index'
+  # login route
+  get 'login', to: "sessions#index"
+  post 'login', to: "sessions#create"
+  get 'authorized', to: 'sessions#page_requires_login'
+  get 'logout', to: 'sessions#destory'
+
+  # user routes
+  resources :users
+  # post routes
   get '/posts/export', to: 'posts#export'
   resources :posts
+  # not found route
+  get ':not_found' => 'posts#index',
+  :constraints => { :not_found => /.*/ }
+
 end
