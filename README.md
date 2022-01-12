@@ -4,13 +4,12 @@
 - [x] MVC
 - [x] Active Record
 - [x] Search
-- [x] Sort Column
 - [x] Paginate
 - [x] Routes
 - [x] Migrate
 - [x] CSV Export
 - [x] Validation
-- [ ] Authentication
+- [x] Authentication
 
 # README
 
@@ -22,7 +21,6 @@ SCM bulletin board with Ruby on Rails.
 - MVC
 - Active Record
 - Search
-- Sort Column
 - Paginate
 - Routes
 - Migrate
@@ -87,3 +85,11 @@ $ rails server
 ```
 
 Finally open http://localhost:3000/ in your browser.
+
+## Admin User
+
+```
+'name' => 'Admin',
+'email' => 'admin@gmail.com',
+'password' => 'password'
+```

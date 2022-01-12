@@ -16,8 +16,8 @@
       <div class="col-6"></div>
       <div class="col-4 text-right">
         <%= form_tag posts_path, :method => :get, class: "d-flex" do %>
-          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "Search with title" %>
-          <%= submit_tag "Search", class: "btn btn-success ml-2" do %>
+          <%= text_field_tag :search, params[:search], class: 'form-control rounded', placeholder: "Search with title" %>
+          <%= submit_tag "Search", class: "btn btn-outline-success ml-2" do %>
           <% end %>
         <% end %>
       </div>

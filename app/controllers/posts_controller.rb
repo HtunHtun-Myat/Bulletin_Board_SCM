@@ -3,16 +3,17 @@ require "csv"
 class PostsController < ApplicationController
   # index post list
   def index
+    user_id = session[:user_id]
     if params[:search]
-      @posts = PostsService.searchPostList(params[:search], params[:page])
+      @posts = PostsService.search_post(params[:search], params[:page], user_id)
     else
-      @posts = PostsService.postList(params[:page])
+      @posts = PostsService.get_posts(params[:page], user_id)
     end
   end
 
   # Post Detail
   def show
-    @post = PostsService.postDetail(params[:id])
+    @post = PostsService.get_post(params[:id])
   end
 
   # New Post form
@@ -22,13 +23,13 @@ class PostsController < ApplicationController
 
   # Edit Post form
   def edit
-    @post = PostsService.postEdit(params[:id])
+    @post = PostsService.edit_post(params[:id])
   end
 
   # Create a new Post
   def create
     user_id = session[:user_id]
-    @post = PostsService.createPost(post_params, user_id)
+    @post = PostsService.create_post(post_params, user_id)
 
     respond_to do |format|
       if @post.save
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
 
   # Update post
   def update
-    @post = PostsService.updatePost(post_params, params[:id])
+    @post = PostsService.update_post(params[:id])
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to posts_path, notice: 'Post was successfully updated.' }
@@ -57,7 +58,7 @@ class PostsController < ApplicationController
 
   # Delete post
   def destroy
-    PostsService.deletePost(params[:id])
+    PostsService.delete_post(params[:id])
 
     respond_to do |format|
       format.html { redirect_to posts_path, notice: 'Post was successfully deleted.' }
@@ -67,7 +68,8 @@ class PostsController < ApplicationController
 
   # csv export
   def export
-    @posts = Post.all
+    user_id = session[:user_id]
+    @posts = PostsService.export_csv(user_id)
     
     respond_to do |format|
       format.csv do

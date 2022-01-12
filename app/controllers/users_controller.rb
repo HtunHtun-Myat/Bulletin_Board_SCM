@@ -1,27 +1,34 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
-  # GET /users or /users.json
+  # index user list
   def index
-    @users = User.page params[:page]
+    user_id = session[:user_id]
+    if params[:search]
+      @users = UsersService.search_user(params[:page], params[:search])
+    else
+      @users = UsersService.get_users(params[:page], user_id)
+    end
   end
 
-  # GET /users/1 or /users/1.json
+  # user detail
   def show
   end
 
-  # GET /users/new
+  # New User Form
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
+  # Edit User Form
   def edit
   end
 
-  # POST /users or /users.json
+  # Create User
   def create
-    @user = User.new(user_params)
+    data = User.new(user_params)
+    data.created_user = session[:user_id]
+    @user = data
 
     respond_to do |format|
       if @user.save
@@ -34,7 +41,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /users/1 or /users/1.json
+  # Update User
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -47,12 +54,24 @@ class UsersController < ApplicationController
     end
   end
 
-  # DELETE /users/1 or /users/1.json
+  # Delete User
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_path, notice: "User was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+
+  # csv export
+  def export
+    @users = User.all
+    
+    respond_to do |format|
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=users.csv"
+      end
     end
   end
 
@@ -64,6 +83,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:name, :email, :password_digest)
+      params.require(:user).permit(:name, :email, :password)
     end
 end

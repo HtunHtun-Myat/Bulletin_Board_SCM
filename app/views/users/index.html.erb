@@ -3,51 +3,99 @@
     <%= notice %>
   </div>
 <% end %>
-
-<div class="text-right">
-  <%= link_to "New User", new_user_path, class: "btn btn-success" %>
-  <a href="#" class="btn btn-success">CSV Export</a>
-</div>
-<div class="py-4">
-<div class="card">
-  <div class="card-header">
-    <div class="row">
-      <div class="col-2 text-left">User List</div>
-      <div class="col-6"></div>
-      <div class="col-4 text-right">
-        <%= form_tag users_path, :method => :get, class: "d-flex" do %>
-          <%= text_field_tag :search, params[:search], class: 'form-control', placeholder: "Search with username" %>
-          <%= submit_tag "Search", class: "btn btn-success ml-2" do %>
+<% if current_user.id == 1 %>
+  <div class="text-right">
+    <%= link_to "New User", new_user_path, class: "btn btn-success" %>
+    <a href="users/export.csv" class="btn btn-success">CSV Export</a>
+  </div>
+  <div class="py-4">
+  <div class="card">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-2 text-left">User List</div>
+        <div class="col-6"></div>
+        <div class="col-4 text-right">
+          <%= form_tag users_path, :method => :get, class: "d-flex" do %>
+            <%= text_field_tag :search, params[:search], class: 'form-control rounded', placeholder: "Search with username" %>
+            <%= submit_tag "Search", class: "btn btn-outline-success ml-2" do %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="card-body"> 
+      <table class="table table-responsive table-bordered">
+          <thead>
+              <tr>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>Created User</th>
+                  <th>Created Date</th>
+                  <th>Updated Date</th>
+                  <th collapse=2>Operation</th>
+              </tr>
+          </thead>
+          <tbody>
+              <% @users.each do |user| %>
+              <tr>
+                  <td><%= user.name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= user.created_user == 1 ? 'Admin' : user.name %></td>
+                  <td><%= user.created_at.strftime('%Y/%m/%d') %></td>
+                  <td><%= user.updated_at.strftime('%Y/%m/%d') %></td>
+                  <td class="text-center"><%= link_to "Edit", edit_user_path(user) ,class: "btn btn-success" %>
+                  <%= link_to "Destroy", user_path(user),
+                                  method: :delete,
+                                  data: { confirm: "Are you sure?" },
+                                  class: "btn btn-danger" 
+                                  %></td>
+              </tr>
+              <%end%>
+          </tbody>
+      </table>
+      <%= paginate @users %>
+    </div>
+  </div>
+  </div>
+<% else %>
+  <div class="card">
+    <div class="card-header">
+      User Detail
+    </div>
+    <div class="card-body">
+      <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+          <label for="name" class="col-sm-10 col-form-label"><%= @users.name %></label>
+        </div>
+      </div>
+      <div class="form-group row">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+              <label for="staticEmail" class="col-sm-10 col-form-label"><%= @users.email %></label>
+          </div>
+      </div>
+      <div class="form-group row">
+        <label for="create-user" class="col-sm-2 col-form-label">Created User</label>
+        <div class="col-sm-10">
+            <label for="create-user" class="col-sm-10 col-form-label">
+            <%= @users.created_user == 1 ? 'Admin' : @users.name %>
+            </label>
+        </div>
+      </div>
+      <div class="form-group row">
+          <label for="create-date" class="col-sm-2 col-form-label">Created Date</label>
+          <div class="col-sm-10">
+              <label for="create-date" class="col-sm-10 col-form-label"><%= @users.created_at.strftime('%Y/%m/%d') %></label>
+          </div>
+      </div>
+      <div class="form-group row">
+          <label for="update-date" class="col-sm-2 col-form-label">Updated Date</label>
+          <div class="col-sm-10">
+              <label for="update-date" class="col-sm-10 col-form-label"><%= @users.updated_at.strftime('%Y/%m/%d') %></label>
+          </div>
       </div>
     </div>
   </div>
-  <div class="card-body"> 
-    <table class="table table-responsive table-bordered">
-        <thead>
-            <tr>
-                <th>User Name</th>
-                <th>Email</th>
-                <th collapse=2>Operation</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @users.each do |user| %>
-            <tr>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td class="text-center"><%= link_to "Edit", edit_user_path(user) ,class: "btn btn-success" %>
-                <%= link_to "Destroy", user_path(user),
-                                method: :delete,
-                                data: { confirm: "Are you sure?" },
-                                class: "btn btn-danger" 
-                                %></td>
-            </tr>
-            <%end%>
-        </tbody>
-    </table>
-    <%= paginate @users %>
-  </div>
-</div>
-</div>
+  <%= link_to "Edit", edit_user_path(@users) ,class: "btn btn-success mt-3" %>
+<% end %>
