@@ -71,7 +71,7 @@ rails db:setup
 ```
 
 ```
-rails webpacker:install
+rails assets:precompile
 ```
 
 After everything is done, run the project:
