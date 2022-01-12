@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   
-  validates_presence_of :title, on: :create, message: "can't be blank"
+  validates_presence_of :title, message: "can't be blank"
   validates :description, presence: true, length: { minimum: 10 }
 
   paginates_per 5

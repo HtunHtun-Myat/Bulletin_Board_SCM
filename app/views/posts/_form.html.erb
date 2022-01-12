@@ -1,14 +1,4 @@
 <%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
-    <div style="color: red">
-      <ul>
-        <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
   <div class="form-group row">
     <div class="col-md-2"> <%= form.label :title %> </div>
       <div class="col-md-8"><%= form.text_field :title, class: "form-control" %></div>
