@@ -71,11 +71,7 @@ rails db:setup
 ```
 
 ```
-rails db:migrate
-```
-
-```
-rails db:seed
+rails webpacker:install
 ```
 
 After everything is done, run the project:
