@@ -29,7 +29,7 @@ SCM bulletin board with Ruby on Rails.
 
 ## Requirements
 
-- Ruby = 2.5.9
+- Ruby = 2.6.9
 - Rails >= 6.1.3
 
 ## Tecnologies
