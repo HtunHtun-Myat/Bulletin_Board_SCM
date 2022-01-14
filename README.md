@@ -69,6 +69,11 @@ bundle install
 ```
 rails db:setup
 ```
+Install Yarn package manager to compile webpack package.
+
+```
+npm install --global yarn
+```
 
 ```
 rails assets:precompile
