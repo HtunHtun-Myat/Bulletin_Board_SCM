@@ -94,3 +94,16 @@ Finally open http://localhost:3000/ in your browser.
 'email' => 'admin@gmail.com',
 'password' => 'password'
 ```
+
+## Installation Error
+
+If you have the following error when run **rails db:setup** command.
+
+![Capture](https://user-images.githubusercontent.com/72719717/149468995-254f3607-ae6a-4a48-957a-2a734e45d7fe.PNG)
+
+Open Command Prompt and enter MYSQL server with **mysql -u root -p** and run the following command.
+
+```
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+```
+and then restart the MYSQL server.It work!!
