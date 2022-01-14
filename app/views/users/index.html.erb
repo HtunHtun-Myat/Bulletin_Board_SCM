@@ -38,7 +38,7 @@
           <tbody>
               <% @users.each do |user| %>
               <tr>
-                  <td><%= user.name %></td>
+                  <td><%= link_to user.name, user %></td>
                   <td><%= user.email %></td>
                   <td><%= user.created_user == 1 ? 'Admin' : user.name %></td>
                   <td><%= user.created_at.strftime('%Y/%m/%d') %></td>

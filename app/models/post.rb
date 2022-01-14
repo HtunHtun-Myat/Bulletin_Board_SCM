@@ -7,9 +7,9 @@ class Post < ApplicationRecord
 
   def self.search(query, user_id)
     if User.is_admin(user_id)
-        where(["title LIKE ?", "%#{query}%"])
+        where(["title OR description LIKE ?", "%#{query}%"])
     else
-        where(["title LIKE ?", "%#{query}%"]).where(:create_user_id => user_id)
+        where(["title OR description LIKE ?", "%#{query}%"]).where(:create_user_id => user_id)
     end
   end
 end

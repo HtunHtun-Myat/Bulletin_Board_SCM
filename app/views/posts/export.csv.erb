@@ -7,7 +7,7 @@
               'Created Date', 
               'Updated Date'
               ] -%>
-<%= CSV.generate_line headers %>
+<%= CSV.generate_line headers, :row_sep => ?\t, :quote_char => ?\ %>
 <%- @posts.each do |post| -%>
   <%= CSV.generate_line([
       post.title, 
@@ -17,6 +17,5 @@
       post.updated_user_id,
       post.created_at.strftime('%Y/%m/%d'), 
       post.updated_at.strftime('%Y/%m/%d')
-    ]) 
-  -%>
+    ]).html_safe -%>
 <%- end -%>
