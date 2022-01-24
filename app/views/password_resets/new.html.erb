@@ -1,0 +1,27 @@
+<% if notice %>
+  <div class="alert alert-danger w-50 mx-auto" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
+
+
+<div class="card w-50 mx-auto">
+  <div class="card-header text-center">
+    Reset Password
+  </div>
+  <div class="card-body">
+  <%= form_tag password_resets_path, :method => :post do %>
+  <div class='form-group row mb-3 mt-2'>
+    <div class="col-md-2">
+        <label for="user_name"><%= label_tag :email %></label>
+    </div>
+    <div class="col-md-8">
+        <%= text_field_tag :email, params[:email], class: 'form-control' %>
+    </div>
+    </div>
+   <div class="form-group row mb-0">
+        <div class="col-md-12 text-center">
+            <%= submit_tag "Reset Password", class: "btn btn-primary" %>
+        </div>
+    </div>
+<% end %>

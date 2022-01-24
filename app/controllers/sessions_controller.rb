@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
+        UserMailer.with(user: @user).welcome_email.deliver_now
         format.html { redirect_to login_path, alert: "Register Succefully" }
         format.json { render :inedx, status: :created, location: @user }
       else

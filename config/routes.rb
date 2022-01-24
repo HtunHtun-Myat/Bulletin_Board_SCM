@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options :host => "localhost:3000"
+  get 'password_resets/new'
   # root route
   root 'sessions#index'
   # login route
@@ -15,8 +17,10 @@ Rails.application.routes.draw do
   # post routes
   get '/posts/export', to: 'posts#export'
   resources :posts
+  # resert password
+  resources :password_resets
+  get '/password_resets/.*/edit/', to: 'password_resets#edit'
   # not found route
   get ':not_found' => 'posts#index',
   :constraints => { :not_found => /.*/ }
-
 end
